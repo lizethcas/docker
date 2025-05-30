@@ -1,10 +1,14 @@
-FROM node:22-alpine
+# Dockerfile en backend
+FROM node:18-alpine
+
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+
+RUN npm install --production
 
 COPY . .
 
 EXPOSE 10000
-CMD ["npm", "run", "dev"]
+
+CMD ["node", "src/index.js"]
