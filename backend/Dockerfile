@@ -22,4 +22,4 @@ ENV NODE_ENV=production
 ENV PORT=10000
 
 # Comando para iniciar la aplicación usando el script start
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
