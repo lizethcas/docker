@@ -1,0 +1,34 @@
+services:
+    # Define todos los servicios (contenedores) que componen la aplicación
+    front:
+        # Nombre del servicio para el frontend
+        build: ./frontend # Construye una imagen usando el Dockerfile en la carpeta ./frontend
+        command: npm run dev # Comando que se ejecuta al iniciar el contenedor (inicia el servidor de desarrollo)
+        ports:
+            # Mapeo de puertos entre el host y el contenedor
+            - "5174:5174" # Expone el puerto definido en la variable PORT_FRONTEND
+        volumes:
+            # Montaje de volúmenes para persistencia y desarrollo
+            - ./frontend:/app # Monta la carpeta ./frontend del host en /app del contenedor (para desarrollo en tiempo real)
+            - /app/node_modules # Volumen anónimo para node_modules (evita que se sobrescriba con archivos locales)
+    back:
+        build: ./backend
+        command: npm run dev
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./backend:/app
+        environment:
+            - PORT=3000
+
+    mongo:
+        image: mongo:latest
+        container_name: mongo
+        ports:
+            - "27017:27017" # Mapea el puerto 27017 del contenedor al puerto 270 en el host
+        restart: always # Reinicia el contenedor automáticamente si falla
+        volumes:
+            - ./mongo:/data/db
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=admin123

@@ -1,0 +1,35 @@
+{
+  "productos": [
+    {
+      "id": "2",
+      "nombre": "Key Board",
+      "precio": 800,
+      "stock": 15,
+      "Nombre": "Key Board"
+    },
+    {
+      "id": "3",
+      "nombre": "Auriculares",
+      "precio": 100,
+      "stock": 20
+    },
+    {
+      "id": "1ee0",
+      "nombre": "Phone",
+      "precio": 700,
+      "stock": 20
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Ana",
+      "email": "ana@ejemplo.com"
+    },
+    {
+      "id": "2",
+      "nombre": "Carlos",
+      "email": "carlos@ejemplo.com"
+    }
+  ]
+}
