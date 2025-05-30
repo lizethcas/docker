@@ -4,7 +4,8 @@ FROM node:22-alpine
 WORKDIR /app
 
 # Copiar archivos de dependencias del backend
-COPY backend/package*.json ./
+# Ya estamos en el contexto de backend/ debido a la configuración de Render
+COPY package*.json ./
 
 # Verificar el contenido del package.json
 RUN cat package.json
@@ -13,7 +14,8 @@ RUN cat package.json
 RUN npm install
 
 # Copiar el resto de archivos del backend
-COPY backend/ ./
+# Ya estamos en el contexto de backend/ debido a la configuración de Render
+COPY . ./
 
 # Listar archivos para verificación
 RUN ls -la
