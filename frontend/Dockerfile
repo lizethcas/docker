@@ -3,7 +3,8 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 # Copiar archivos de dependencias
-COPY frontend/package*.json ./
+# Ya estamos en el contexto de frontend/ debido a la configuración de Render
+COPY package*.json ./
 
 # Limpiar caché de npm para evitar problemas
 RUN npm cache clean --force && \
@@ -13,7 +14,8 @@ RUN npm cache clean --force && \
 RUN grep -q '"build"' package.json || (echo "Error: script 'build' no encontrado en package.json" && exit 1)
 
 # Copiar el resto de archivos
-COPY frontend/ .
+# Ya estamos en el contexto de frontend/ debido a la configuración de Render
+COPY . .
 
 # Crear archivo .env durante la construcción
 RUN echo "VITE_API_URL=${VITE_API_URL:-http://localhost:10000}" > .env
