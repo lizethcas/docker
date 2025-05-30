@@ -3,14 +3,17 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-# Copiar archivos de dependencias
-COPY package*.json ./
+# Copiar archivos de dependencias del backend
+COPY backend/package*.json ./
+
+# Verificar el contenido del package.json
+RUN cat package.json
 
 # Instalar dependencias (incluidas las de desarrollo para tener nodemon)
 RUN npm install
 
-# Copiar el resto de archivos
-COPY . .
+# Copiar el resto de archivos del backend
+COPY backend/ ./
 
 # Listar archivos para verificación
 RUN ls -la
