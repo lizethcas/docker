@@ -21,8 +21,23 @@ FROM nginx:alpine
 # Copiar archivos de la etapa de construcción
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copiar configuración personalizada de nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Crear configuración personalizada de nginx
+RUN echo 'server { \
+    listen 80; \
+    server_name localhost; \
+    \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html index.htm; \
+        try_files $uri $uri/ /index.html; \
+        \
+        # Configuración para SPA \
+        add_header Cache-Control "no-cache, no-store, must-revalidate"; \
+    } \
+    \
+    # Configuración para manejar errores 404 \
+    error_page 404 =200 /index.html; \
+}' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
