@@ -12,8 +12,8 @@ RUN npm install
 # Copiar el resto de archivos
 COPY . .
 
-# Verificar que el archivo existe
-RUN ls -la src/
+# Listar archivos para verificación
+RUN ls -la
 
 EXPOSE 10000
 
