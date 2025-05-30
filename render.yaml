@@ -1,0 +1,38 @@
+# render.yaml
+services:
+  # Backend service
+  - type: web
+    name: backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free  # o 'starter' si necesitas más recursos
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000  # Render usa este puerto por defecto
+    # Variables de base de datos (si las necesitas)
+    # - key: DATABASE_URL
+    #   fromDatabase:
+    #     name: mi-database
+    #     property: connectionString
+
+  # Frontend service  
+  - type: web
+    name: frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REACT_APP_API_URL  # o VITE_API_URL si usas Vite
+        fromService:
+          type: web
+          name: backend
+          property: host
+
+# Si necesitas base de datos PostgreSQL
+# databases:
+#   - name: mi-database
+#     plan: free
