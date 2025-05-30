@@ -9,7 +9,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-  res.status(200).send("OK");
+  res.status(200).send({
+    status: "ok",
+    message: "Server is running",
+    timestamp: new Date(),
+  });
 });
 
 app.listen(process.env.PORT, () => {
