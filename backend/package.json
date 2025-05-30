@@ -7,7 +7,8 @@
     "clase_01": "nodemon node.js",
     "clase_02": "nodemon clase_02.js",
     "api": "json-server --watch db.json",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
