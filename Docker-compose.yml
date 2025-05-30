@@ -11,6 +11,9 @@ services:
             # Montaje de volúmenes para persistencia y desarrollo
             - ./frontend:/app # Monta la carpeta ./frontend del host en /app del contenedor (para desarrollo en tiempo real)
             - /app/node_modules # Volumen anónimo para node_modules (evita que se sobrescriba con archivos locales)
+        environment:
+            # Variables de entorno para el contenedor
+            - PORT=5174 # Establece la variable PORT con el valor de PORT_FRONTEND
     back:
         build: ./backend
         command: npm run dev
